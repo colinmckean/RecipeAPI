@@ -35,7 +35,7 @@ app.post('/recipe', upload.single('file'), (req, res) => {
   var recipe = new Recipe(
     req.body
   )
-  recipe.imageURL = req.file.path
+  if(req.file) recipe.imageURL = req.file.path
   recipe.save().then((doc) => {
     res.send(doc);
   }, (e) => {
@@ -91,7 +91,7 @@ app.delete('/recipes/:id', (req, res) => {
     res.status(400).send();
   });
 });
-//
+
 app.patch('/recipes/:id', (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['title', 'instructions', 'ingredients']);
