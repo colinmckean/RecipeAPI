@@ -1,2 +1,4 @@
 node_modules
 uploads
+bundle.js
+bundle.js.map
