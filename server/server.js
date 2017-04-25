@@ -9,6 +9,9 @@ var {mongoose} = require('./db/mongoose');
 var {Recipe} = require('./models/recipe');
 // var {User} = require('./models/user');
 var multer  = require('multer')
+
+// following code is from https://github.com/expressjs/multer/issues/170
+// other examples on this page
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, __dirname+'/uploads/')
@@ -30,12 +33,10 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 app.post('/recipe', upload.single('file'), (req, res) => {
-  console.log(req.file)
-  console.log(req.body)
   var recipe = new Recipe(
     req.body
   )
-  if(req.file) recipe.imageURL = req.file.path
+  if(req.file) recipe.imageURL = `images/${req.file.filename}`
   recipe.save().then((doc) => {
     res.send(doc);
   }, (e) => {
@@ -106,9 +107,12 @@ app.patch('/recipes/:id', (req, res) => {
   });
 });
 
+// app.get('/', (req, res)  => {
+//   // console.log(__dirname)
+//   // res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
 
-
-
+app.use(express.static(__dirname + './../client/build/'));
 app.listen(port, () => {
 
   console.log(`started up on port ${port}`);

@@ -39,6 +39,24 @@ var Recipe = mongoose.model('Recipe', {
 //some ideas, would like an ingredientsAPI, that holds all types of ingredients.
 //recipe also holds details of who posted recipe
 
+
+
+
+// {title: "Grilled Cheese Deluxe",
+// instructions: "1. Spread each slice of bread on both sides with softened butter. // 2. Arrange four slices in large skillet or electric flat grill, and cook over medium heat until light golden brown, 2 to 3 minutes. Flip over. 3. Layer 1 slice mozzarella, 1 slice provolone, 4 slices NatureSweet® Jubilees™ tomatoes, 2 basil leaves, salt and pepper. 4. Top the sandwich with second slice of buttered bread, flip again. Cook for 2 or 3 more minutes until golden brown on both sides. 5. Remove from grill, and allow to rest for 1 minute before slicing.",
+// "cookingTime": 900000,
+// ingredients: [4 NatureSweet® Jubilees™ tomatoes; thinly sliced
+// 8 thick slices white bread (Texas toast or similar)
+// 8 tablespoons unsalted butter; softened
+// 4 slices mozzarella cheese
+// 4 slices provolone cheese
+// 8 fresh basil leaves
+// salt and pepper to taste
+// Original recipe makes 4 Servings]
+
+// }
+
+
 module.exports = {Recipe}
 
 //this is some of the fields from bigoven
