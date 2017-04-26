@@ -11,7 +11,6 @@ export default class RecipeFetch {
     xhr.open("GET", url);
     xhr.onload = () => {
       var recipe = JSON.parse(xhr.responseText);
-      // console.log(xhr.responseText)
       this.recipe = recipe;
       console.log(this.recipe);
       callback(recipe);

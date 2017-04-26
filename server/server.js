@@ -24,7 +24,7 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({ storage: storage });
-
+///////////////////////////////////////////
 
 
 var app = express();
@@ -32,14 +32,14 @@ var app = express();
 const port = process.env.PORT || 3000;
 
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/recipe', upload.single('file'), (req, res) => {
-  console.log("this is body", req)
   var recipe = new Recipe(
     req.body
   )
+  recipe.cookingTime = (recipe.cookingTime * 60) * 1000;
   if(req.file) recipe.imageURL = `images/${req.file.filename}`
   recipe.save().then((doc) => {
     res.send(doc);

@@ -9,12 +9,14 @@ const recipes = [{
   _id: new ObjectID(),
   title: "Homemade Jam",
   instructions: "Make the Jam",
-  imageURL: "http://www.goggle.com"
+  imageURL: "http://www.goggle.com",
+  cookingTime: 60000
 },{
   _id: new ObjectID(),
   title: "Homemade Pizza",
   instructions: "Make the Pizza",
-  imageURL: "http://www.goggle.com"
+  imageURL: "http://www.goggle.com",
+  cookingTime: 60000
 }]
 
 beforeEach((done) => {
@@ -27,6 +29,7 @@ describe('POST /recipe', () => {
 
     var recipe = {
       title: "title",
+      cookingTime: 0,
       instructions: "instructions to make sausage"
     };
     request(app)
@@ -39,6 +42,7 @@ describe('POST /recipe', () => {
       .end((err, res) => {
         if(err) {
           return done(err);
+
         }
         Recipe.find(recipe).then((recipes) => {
           expect(recipes.length).toBe(1);
