@@ -10,6 +10,7 @@ var {Recipe} = require('./models/recipe');
 // var {User} = require('./models/user');
 var multer  = require('multer')
 
+
 // following code is from https://github.com/expressjs/multer/issues/170
 // other examples on this page
 var storage = multer.diskStorage({
@@ -30,9 +31,12 @@ var app = express();
 // var upload = multer({ dest: './uploads/' })
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+
+// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/recipe', upload.single('file'), (req, res) => {
+  console.log("this is body", req)
   var recipe = new Recipe(
     req.body
   )
@@ -45,7 +49,7 @@ app.post('/recipe', upload.single('file'), (req, res) => {
 });
 
 app.get('/images/:id', function (req, res) {
-  console.log(req.params)
+  console.log(req.body)
   console.log(__dirname, '/uploads', req.params.id)
     res.sendFile(__dirname + '/uploads/' + req.params.id);
 });
