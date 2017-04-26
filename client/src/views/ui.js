@@ -1,5 +1,5 @@
 import RecipeFetch from "../RecipeFetch";
-
+import moment from 'moment';
 export default class UI{
 
   constructor() {
@@ -16,9 +16,14 @@ export default class UI{
 
   }
 
+  addInstruction() {
+    console.log("Hiya");
+  }
+
+
   showImage(recipe) {
 
-    var rc = document.querySelector('#image-container')
+    var rc = document.querySelector('#recipe-container')
     rc.innerHTML = '';
     var img = document.createElement('img');
     img.src = recipe.recipe.imageURL
@@ -43,6 +48,9 @@ export default class UI{
       li.innerText = instrction
       instructions.appendChild(li);
     })
+    var cookingTime = document.createElement('p');
+    cookingTime.innerText = "Ready in: "+ moment.duration(recipe.recipe.cookingTime).humanize();;
+
     // instructions.innerText = recipe.recipe.instructions;
     h2.innerText = recipe.recipe.title;
 
@@ -59,7 +67,9 @@ export default class UI{
 //
 
     rc.appendChild(h2);
+    rc.appendChild(cookingTime);
     rc.appendChild(ingredients);
     rc.appendChild(instructions);
+
   }
 };
